@@ -13,7 +13,7 @@ This is a simple Discord Bot to help give you random operators for Tom Clancy's:
 - Reset your previously used operators data
 ## Installation
 
-You can add this discord bot to your server with [this invite link](https://discord.com/oauth2/authorize?client_id=1258320576376737832&permissions=8&integration_type=0&scope=bot+applications.commands)
+You can add this discord bot to your server with [this invite link](https://discord.com/oauth2/authorize?client_id=1258320576376737832&permissions=277025508352&integration_type=0&scope=applications.commands+bot)
     
 Alternatively, you can also download this project with git and host on your own device. Follow these steps in a command prompt.
 
