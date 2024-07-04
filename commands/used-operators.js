@@ -40,8 +40,8 @@ module.exports = {
             .setTitle('Used Operators on ' + team)
             .setColor('Blurple')
             .setDescription(
-            `**You have currently used:**\n${usedOperators.join(', ') || 'None'}\n\n` +
-            `**You have not used:**\n${operatorList.filter(element => !usedOperators.includes(element)).join(', ') || 'None'}`)
+            `**You have currently used:**\n${usedOperators.join(', ') || 'None'} (${usedOperators.length}/${operatorList.length})\n\n` +
+            `**You have not used:**\n${operatorList.filter(element => !usedOperators.includes(element)).join(', ') || 'None'} (${operatorList.length - usedOperators.length}/${operatorList.length})`)
 
         interaction.reply({ embeds: [embed] });
     }
