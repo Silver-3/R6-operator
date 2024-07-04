@@ -64,6 +64,7 @@ module.exports = {
 
             if (await db.has(interaction.user.id)) {
                 embed.setFooter({ text: 'Note: This operator has been added to used operators. Disable this with /remember disable' });
+                embed.setDescription(embed.data.description + `\n\n*You can view your used operators with \`/used-operators\`*`);
 
                 db.push(`${interaction.user.id}.operators.${team}`, operator);
             }
