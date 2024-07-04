@@ -1,6 +1,7 @@
 node_modules/
 templates/
-*.json
+config.json
+package-lock.json
 *.sqlite
 *.bat
 *.txt
