@@ -3,3 +3,4 @@ templates/
 *.json
 *.sqlite
 *.bat
+*.txt
