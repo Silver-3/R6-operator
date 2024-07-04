@@ -17,6 +17,7 @@ module.exports = {
                 { name: '/random-operator <attack/defense>', value: 'Gives you a random operator from selected team', inline: true },
                 { name: '/remember <activate/deactivate>', value: 'Have the bot remember your used operators so you dont get the same operators again', inline: true },
                 { name: '/reset <attack/defense>', value: 'Reset used operators data', inline: true },
+                { name: '/used-operators <attack/defense>', value: 'Shows you all the operators you have used', inline: true },
                 { name: '/help', value: 'View all the bots commands', inline: true },
             )
 
