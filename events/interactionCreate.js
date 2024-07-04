@@ -37,7 +37,7 @@ module.exports = {
         try {
             await command.run(interaction, client, db);
         } catch (error) {
-            client.throwError(error);
+            throw error;
         }
     }
 }
