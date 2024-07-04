@@ -1,0 +1,6 @@
+Make a discord bot that gives you a random operator and remembers what operators you have already used
+
+commands-
+
+/random operator: attack/defense
+/used operators: attack/defense/all
