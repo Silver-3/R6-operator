@@ -23,7 +23,7 @@ cd R6-operator
 npm install
 notepad config.json
 ```
-then copy this template and put in your discord token instead of token
+then copy this template inside the notepad that opens and put in your discord bot token instead of TOKEN and click save
 ```json
 {
     "token": "TOKEN"
