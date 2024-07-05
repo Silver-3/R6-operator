@@ -26,7 +26,7 @@ module.exports = {
 
         const embed = new Discord.EmbedBuilder()
             .setTitle('Confirmation')
-            .setDescription(`Are you sure you want to reset your data on used ${team.attack ? 'attacker' : 'defender'} operators?`)
+            .setDescription(`Are you sure you want to reset your data on used ${team == 'attack' ? 'attacker' : 'defender'} operators?`)
             .setColor('Blurple')
             .setFooter({
                 text: 'This can not be undone'
@@ -39,7 +39,7 @@ module.exports = {
 
         const confirmEmbed = new Discord.EmbedBuilder()
             .setTitle('Reset confirmed')
-            .setDescription(`Data on used ${team.attack ? 'attackers' : 'defenders'} has been reset`)
+            .setDescription(`Data on used ${team == 'attack' ? 'attackers' : 'defenders'} has been reset`)
             .setColor('Blurple')
 
         const cancelEmbed = new Discord.EmbedBuilder()

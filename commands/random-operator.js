@@ -15,11 +15,12 @@ module.exports = {
 
         let operatorList = team == 'attack' ? R6Info.getAttackers() : R6Info.getDefenders();
         operatorList = operatorList.map(operator => {
-            return operator[Object.keys(operator)[0]].name;
+            return operator[Object.keys(operator)[0]].name.toLowerCase();
         });
 
         async function checkOperator(operator) {
             const usedOperators = await db.get(`${interaction.user.id}.operators.${team}`);
+            operator = operator.toLowerCase();
 
             if (Array.isArray(usedOperators) && operatorList.includes(operator) && usedOperators.includes(operator)) {
                 return true;
@@ -62,7 +63,7 @@ module.exports = {
                 embed.setFooter({ text: 'Note: This operator has been added to used operators. Disable this with /remember disable' });
                 embed.setDescription(embed.data.description + `\n\n*You can view your used operators with \`/used-operators\`*`);
 
-                db.push(`${interaction.user.id}.operators.${team}`, operator);
+                db.push(`${interaction.user.id}.operators.${team}`, operator.name.toLowerCase());
             }
 
             interaction.reply({

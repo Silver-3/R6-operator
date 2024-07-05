@@ -25,17 +25,23 @@ module.exports = {
             order_map.set(item, index);
         });
 
+        if(usedOperators == null || usedOperators.length == 0) return interaction.reply(`You have not used any operators on ${team}`);
         usedOperators.sort((a, b) => {
             return order_map.get(a) - order_map.get(b);
         });
 
         function capitalize(string) {
+            if (typeof string !== 'string') {
+                console.error('Expected a string but got:', typeof string, string);
+                return string;
+            }
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
-
+        
         function capitalizeArray(array) {
             return array.map(capitalize);
         }
+        
 
         const embed = new Discord.EmbedBuilder()
             .setTitle('Used Operators on ' + team)
