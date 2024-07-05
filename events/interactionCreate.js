@@ -21,10 +21,6 @@ module.exports = {
             }
         }
 
-        if (interaction.isButton()) {
-            if (interaction.customId == 'delete_eval') return interaction.message.delete();
-        }
-
         if (!interaction.isCommand()) return;
 
         const commandName = interaction.commandName
@@ -32,12 +28,11 @@ module.exports = {
         const command = client.commands.get(commandName);
         if (!command) return
 
-        if (command.category == "botdev" && interaction.user.id !== client.config.botdevid) return client.errorEmbed(interaction, 'You are not allowed to use this command', true);
-
         try {
             await command.run(interaction, client, db);
         } catch (error) {
-            throw error;
+            interaction.reply("Something went wrong\n" + error.message);
+            console.error(error);
         }
     }
 }

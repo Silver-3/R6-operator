@@ -1,6 +1,7 @@
 const chalk = require('chalk').default;
 const Discord = require('discord.js');
 const QuickDB = require('quick.db').QuickDB;
+const R6operators = require('r6operators');
 
 module.exports = {
     name: 'ready',
