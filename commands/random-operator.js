@@ -1,7 +1,8 @@
 const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
 const QuickDB = require('quick.db').QuickDB;
-const r6operators = require('r6operators');
+// const r6operators = require('r6operators');
+const R6Info = require('@silver-3/r6-info');
 
 module.exports = {
     /**
@@ -11,7 +12,11 @@ module.exports = {
      */
     run: async (interaction, client, db) => {
         const team = interaction.options.getString('team');
-        const operatorList = team == 'attack' ? require('../operators.json').attack : require('../operators.json').defense;
+
+        let operatorList = team == 'attack' ? R6Info.getAttackers() : R6Info.getDefenders();
+        operatorList = operatorList.map(operator => {
+            return operator[Object.keys(operator)[0]].name;
+        });
 
         async function checkOperator(operator) {
             const usedOperators = await db.get(`${interaction.user.id}.operators.${team}`);
@@ -43,23 +48,14 @@ module.exports = {
             }
         }
 
-        function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-
-        function operatorStats(name) {
-            return r6operators[name].ratings;
-        }
-
         await randomOperator().then(async (operator) => {
-            const attachment = new Discord.AttachmentBuilder(`./images/${operator}.png`, {
-                name: 'operator.png'
-            });
+            operator = R6Info.getOperator(operator);
+            const attachment = new Discord.AttachmentBuilder(operator.icon);
 
             const embed = new Discord.EmbedBuilder()
-                .setTitle(`The random operator is: ${capitalizeFirstLetter(operator)}`)
-                .setDescription(`\nHealth: ${operatorStats(operator).health}\nSpeed: ${operatorStats(operator).speed}\nDifficulty: ${operatorStats(operator).difficulty}`)
-                .setThumbnail('attachment://operator.png')
+                .setTitle(`The random operator is: ${operator.name}`)
+                .setDescription(`\nHealth: ${operator.stats.health}\nSpeed: ${operator.stats.speed}\nDifficulty: ${operator.stats.difficulty}`)
+                .setThumbnail(`attachment://${operator.name.toLowerCase()}.png`)
                 .setColor('Blurple');
 
             if (await db.has(interaction.user.id)) {

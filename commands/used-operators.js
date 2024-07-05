@@ -2,6 +2,7 @@ const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
 const QuickDB = require('quick.db').QuickDB;
 const fs = require('fs');
+const R6Info = require('@silver-3/r6-info');
 
 module.exports = {
     /**
@@ -13,7 +14,10 @@ module.exports = {
         const team = interaction.options.getString('team');
         if(!await db.has(interaction.user.id)) return interaction.reply({ content: "You do not have any operators saved in the database. This is likely because you have not enabled remembering operators. Use \`/remember activate\` to activate remebering.", ephemeral: true });
         
-        let operatorList = team == 'attack' ? require('../operators.json').attack : require('../operators.json').defense;
+        let operatorList = team == 'attack' ? R6Info.getAttackers() : R6Info.getDefenders();
+        operatorList = operatorList.map(operator => {
+            return operator[Object.keys(operator)[0]].name.toLowerCase();
+        });
         let usedOperators = await db.get(`${interaction.user.id}.operators.${team}`);
 
         let order_map = new Map();
@@ -33,15 +37,12 @@ module.exports = {
             return array.map(capitalize);
         }
 
-        operatorList = capitalizeArray(operatorList);
-        usedOperators = capitalizeArray(usedOperators);
-
         const embed = new Discord.EmbedBuilder()
             .setTitle('Used Operators on ' + team)
             .setColor('Blurple')
             .setDescription(
-            `**You have currently used:**\n${usedOperators.join(', ') || 'None'} (${usedOperators.length}/${operatorList.length})\n\n` +
-            `**You have not used:**\n${operatorList.filter(element => !usedOperators.includes(element)).join(', ') || 'None'} (${operatorList.length - usedOperators.length}/${operatorList.length})`)
+            `**You have currently used:**\n${capitalizeArray(usedOperators).join(', ') || 'None'} (${usedOperators.length}/${operatorList.length})\n\n` +
+            `**You have not used:**\n${capitalizeArray(operatorList.filter(element => !usedOperators.includes(element))).join(', ') || 'None'} (${operatorList.length - usedOperators.length}/${operatorList.length})`)
 
         interaction.reply({ embeds: [embed] });
     }
