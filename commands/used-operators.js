@@ -12,8 +12,22 @@ module.exports = {
      */
     run: async (interaction, client, db) => {
         const team = interaction.options.getString('team');
-        if(!await db.has(interaction.user.id)) return interaction.reply({ content: "You do not have any operators saved in the database. This is likely because you have not enabled remembering operators. Use \`/remember activate\` to activate remebering.", ephemeral: true });
-        
+
+        const error1 = new Discord.EmbedBuilder()
+            .setTitle('Something went wrong')
+            .setColor('Red')
+            .setDescription(`You do not have remembering operators enabled. Please enable this using \`/remember activate\`.`)
+
+        const error2 = new Discord.EmbedBuilder()
+            .setTitle('Something went wrong')
+            .setColor('Red')
+            .setDescription(`You have not used any operators on ${team} yet. To "use" an operator use \`/random-operator <team>\`.`)
+
+        if (!await db.has(interaction.user.id)) return interaction.reply({
+            embeds: [error1],
+            ephemeral: true
+        });
+
         let operatorList = team == 'attack' ? R6Info.getAttackers() : R6Info.getDefenders();
         operatorList = operatorList.map(operator => {
             return operator[Object.keys(operator)[0]].name.toLowerCase();
@@ -25,7 +39,11 @@ module.exports = {
             order_map.set(item, index);
         });
 
-        if(usedOperators == null || usedOperators.length == 0) return interaction.reply(`You have not used any operators on ${team}`);
+        if (usedOperators == null || usedOperators.length == 0) return interaction.reply({
+            embeds: [error2],
+            ephemeral: true
+        });
+        
         usedOperators.sort((a, b) => {
             return order_map.get(a) - order_map.get(b);
         });
@@ -37,20 +55,22 @@ module.exports = {
             }
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
-        
+
         function capitalizeArray(array) {
             return array.map(capitalize);
         }
-        
+
 
         const embed = new Discord.EmbedBuilder()
             .setTitle('Used Operators on ' + team)
             .setColor('Blurple')
             .setDescription(
-            `**You have currently used:**\n${capitalizeArray(usedOperators).join(', ') || 'None'} (${usedOperators.length}/${operatorList.length})\n\n` +
-            `**You have not used:**\n${capitalizeArray(operatorList.filter(element => !usedOperators.includes(element))).join(', ') || 'None'} (${operatorList.length - usedOperators.length}/${operatorList.length})`)
+                `**You have currently used:**\n${capitalizeArray(usedOperators).join(', ') || 'None'} (${usedOperators.length}/${operatorList.length})\n\n` +
+                `**You have not used:**\n${capitalizeArray(operatorList.filter(element => !usedOperators.includes(element))).join(', ') || 'None'} (${operatorList.length - usedOperators.length}/${operatorList.length})`)
 
-        interaction.reply({ embeds: [embed] });
+        interaction.reply({
+            embeds: [embed]
+        });
     }
 }
 

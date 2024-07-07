@@ -31,7 +31,7 @@ module.exports = {
         try {
             await command.run(interaction, client, db);
         } catch (error) {
-            interaction.reply("Something went wrong\n" + error.message);
+            interaction.reply("Something went wrong\nPlease try again later");
             console.error(error);
         }
     }

@@ -12,11 +12,21 @@ module.exports = {
         let choice = interaction.options.getString("choice");
         choice == 'activate' ? choice = true : choice = false;
 
+        const embed = new Discord.EmbedBuilder()
+            .setColor('Blurple')
+            .setDescription(`Remembering operators is now ${choice == true ? "activated" : "deactivated"}`)
+
         if (choice) {
-            interaction.reply("Remembering operators is now activated.");
+            interaction.reply({
+                embeds: [embed],
+                ephemeral: true
+            });
             db.set(`${interaction.user.id}.operatorRemember`, "true");
         } else {
-            interaction.reply("Remembering operators is now deactivated.");
+            interaction.reply({
+                embeds: [embed],
+                ephemeral: true
+            });
             db.delete(interaction.user.id);
         }
     }

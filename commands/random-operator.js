@@ -1,7 +1,6 @@
 const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
 const QuickDB = require('quick.db').QuickDB;
-// const r6operators = require('r6operators');
 const R6Info = require('@silver-3/r6-info');
 
 module.exports = {
@@ -42,8 +41,6 @@ module.exports = {
 
                     checkedOperators.add(operator);
                 }
-
-                throw new Error("All operators have been used.");
             } else {
                 return operatorList[Math.floor(Math.random() * operatorList.length)];
             }
@@ -55,13 +52,24 @@ module.exports = {
 
             const embed = new Discord.EmbedBuilder()
                 .setTitle(`The random operator is: ${operator.name}`)
-                .setDescription(`\nHealth: ${operator.stats.health}\nSpeed: ${operator.stats.speed}\nDifficulty: ${operator.stats.difficulty}`)
                 .setThumbnail(`attachment://${operator.name.toLowerCase()}.png`)
-                .setColor('Blurple');
+                .setColor('Blurple')
+                .addFields(
+                    { name: 'Loadout', value: ' ', inline: true },{ name: ' ', value: ' ', inline: true },{ name: ' ', value: ' ', inline: true },
+                    { name: 'Primary Weapons', value: operator.guns.primary.join(' | '), inline: true },
+                    { name: 'Secondary Weapons', value: operator.guns.secondary.join(' | '), inline: true },
+                    { name: 'Gadgets', value: operator.gadgets.join(' | '), inline: true },
+                    { name: 'Information', value: ' ', inline: true },{ name: ' ', value: ' ', inline: true },{ name: ' ', value: ' ', inline: true },
+                    { name: `Ability: ${operator.ability.name}`, value: operator.ability.description, inline: true },
+                    { name: 'Specialties', value: operator.specialties.join(', '), inline: true },
+                    { name: 'Stats', value: `Health: ${operator.stats.health}\nSpeed: ${operator.stats.speed}\nDifficulty: ${operator.stats.difficulty}`, inline: true },
+                )
 
             if (await db.has(interaction.user.id)) {
                 embed.setFooter({ text: 'Note: This operator has been added to used operators. Disable this with /remember disable' });
-                embed.setDescription(embed.data.description + `\n\n*You can view your used operators with \`/used-operators\`*`);
+                embed.addFields(
+                    { name: ' ', value: `\n\n*You can view your used operators with \`/used-operators\`*`,},
+                )
 
                 db.push(`${interaction.user.id}.operators.${team}`, operator.name.toLowerCase());
             }
