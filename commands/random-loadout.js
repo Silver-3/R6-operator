@@ -9,6 +9,7 @@ module.exports = {
      * @param {Discord.CommandInteraction} interaction 
      * @param {QuickDB} db
      */
+    usage: 'random-loadout <operator>',
     run: async (interaction, client, db) => {
         const operatorName = interaction.options.getString("operator");
         let operator;

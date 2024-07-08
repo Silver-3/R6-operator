@@ -8,6 +8,7 @@ module.exports = {
      * @param {Discord.CommandInteraction} interaction 
      * @param {QuickDB} db
      */
+    usage: 'remember <activate/deactivate>',
     run: async (interaction, client, db) => {
         let choice = interaction.options.getString("choice");
         choice == 'activate' ? choice = true : choice = false;

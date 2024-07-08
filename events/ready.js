@@ -1,6 +1,5 @@
 const chalk = require('chalk').default;
 const Discord = require('discord.js');
-const QuickDB = require('quick.db').QuickDB;
 
 module.exports = {
     name: 'ready',
@@ -12,7 +11,7 @@ module.exports = {
         console.log(chalk.red("[BOT]") + " Bot is online.");
 
         client.guilds.cache.forEach(guild => {
-            require(`../handlers/loadCommands`)(client, guild.id);
+            require(`../handlers/commands`).load(client, guild.id);
         });
     }
 }

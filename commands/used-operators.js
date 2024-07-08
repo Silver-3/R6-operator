@@ -10,6 +10,7 @@ module.exports = {
      * @param {Discord.CommandInteraction} interaction 
      * @param {QuickDB} db
      */
+    usage: 'used-operators <team>',
     run: async (interaction, client, db) => {
         const team = interaction.options.getString('team');
 

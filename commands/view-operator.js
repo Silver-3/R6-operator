@@ -9,6 +9,7 @@ module.exports = {
      * @param {Discord.CommandInteraction} interaction 
      * @param {QuickDB} db
      */
+    usage: 'view-operator <operator>',
     run: async (interaction, client, db) => {
         const operatorName = interaction.options.getString("operator");
         let operator;
@@ -61,7 +62,7 @@ module.exports = {
 
 module.exports.data = new SlashCommand()
     .setName("view-operator")
-    .setDescription("View any operator")
+    .setDescription("View any operator information")
     .addStringOption(option => option
         .setName("operator")
         .setDescription("The name of the operator")

@@ -12,7 +12,7 @@ client.commands = new Discord.Collection();
 client.config = config;
 client.db = new QuickDB();
 
-["command", "event"].forEach(handler => {
+["commands", "events"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
 
