@@ -133,7 +133,7 @@ module.exports = {
 
             const collector = await response.createMessageComponentCollector({
                 componentType: Discord.ComponentType.Button,
-                time: 10_000
+                time: 30_000
             });
 
             collector.on('collect', async (i) => {
