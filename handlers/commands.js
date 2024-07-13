@@ -36,7 +36,7 @@ module.exports.load = async (client, guildId) => {
           body: commands
         },
       ); 
-      console.log(chalk.cyan("[SLASH-COMMANDS]") + ` registered ${commands.length} commands in ${client.guilds.cache.get(guildId).name} (${guildId})`);
+      console.log(chalk.blue("[SLASH-COMMANDS]") + ` registered ${commands.length} commands in ${client.guilds.cache.get(guildId).name} (${guildId})`);
     } catch (error) {
       console.error(error);
     }
