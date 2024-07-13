@@ -10,6 +10,17 @@ module.exports = {
      * @param {QuickDB} db
      */
     usage: 'view-operator <operator>',
+    autocomplete: async (interaction, client, db) => {
+        const value = interaction.options.getFocused().toLowerCase();
+        let choices = R6Info.getAllOperators().map(x => x.name);
+
+        const filtered = choices.filter(choice => choice.toLowerCase().includes(value)).slice(0, 25);
+
+        await interaction.respond(filtered.map(choice => ({
+            name: choice,
+            value: choice
+        })));
+    },
     run: async (interaction, client, db) => {
         const operatorName = interaction.options.getString("operator");
         let operator;
@@ -67,5 +78,5 @@ module.exports.data = new SlashCommand()
         .setName("operator")
         .setDescription("The name of the operator")
         .setRequired(true)
+        .setAutocomplete(true)
     )
-// add autocompletion
