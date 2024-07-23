@@ -61,7 +61,7 @@ module.exports = {
             const embed = new Discord.EmbedBuilder()
                 .setTitle('Something went wrong')
                 .setColor('Red')
-                .setDescription(`That operator does not exist. Please check the spelling`)
+                .setDescription(`That operator does not exist. Please check the spelling.`)
 
             interaction.reply({
                 embeds: [embed],
@@ -78,5 +78,4 @@ module.exports.data = new SlashCommand()
         .setName("operator")
         .setDescription("The name of the operator")
         .setRequired(true)
-        .setAutocomplete(true)
-    )
+        .setAutocomplete(true))
