@@ -1,12 +1,10 @@
 const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
-const QuickDB = require('quick.db').QuickDB;
 
 module.exports = {
     /**
      * @param {Discord.Client} client 
      * @param {Discord.CommandInteraction} interaction 
-     * @param {QuickDB} db
      */
     usage: 'remember <activate/deactivate>',
     run: async (interaction, client, db) => {

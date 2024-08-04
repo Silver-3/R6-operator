@@ -2,6 +2,7 @@ node_modules/
 templates/
 config.json
 package-lock.json
+db.json
 *.sqlite
 *.bat
 *.txt

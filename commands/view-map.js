@@ -1,13 +1,11 @@
 const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
-const QuickDB = require('quick.db').QuickDB;
 const R6Info = require('@silver-3/r6-info');
 
 module.exports = {
     /**
      * @param {Discord.Client} client 
      * @param {Discord.CommandInteraction} interaction 
-     * @param {QuickDB} db
      */
     usage: 'view-map <map>',
     autocomplete: async (interaction, client, db) => {

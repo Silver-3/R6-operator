@@ -1,13 +1,11 @@
 const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
-const QuickDB = require('quick.db').QuickDB;
 const R6Info = require('@silver-3/r6-info');
 
 module.exports = {
     /**
      * * @param {Discord.CommandInteraction} interaction 
      * @param {Discord.Client} client 
-     * @param {QuickDB} db
      */
     usage: 'random-operator <team>',
     run: async (interaction, client, db) => {

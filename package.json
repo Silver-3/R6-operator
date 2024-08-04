@@ -2,12 +2,11 @@
     "dependencies": {
         "@discordjs/rest": "^2.3.0",
         "@silver-3/r6-info": "^1.0.9",
-        "better-sqlite3": "^11.1.2",
         "chalk": "^2.4.2",
         "convert-svg-to-png": "^0.6.4",
         "discord-api-types": "^0.37.91",
         "discord.js": "^14.15.3",
         "fs": "^0.0.1-security",
-        "quick.db": "^9.1.7"
+        "quickmongo": "^5.2.0"
     }
 }

@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const QuickDB = require('quick.db').QuickDB;
 const chalk = require('chalk').default;
 
 module.exports = {
