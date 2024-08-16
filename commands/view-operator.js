@@ -59,7 +59,7 @@ module.exports = {
             const embed = new Discord.EmbedBuilder()
                 .setTitle('Something went wrong')
                 .setColor('Red')
-                .setDescription(`That operator does not exist. Please check the spelling.`)
+                .setDescription(`That operator does not exist. Please check the spelling or use the provided auto complete.`)
 
             interaction.reply({
                 embeds: [embed],

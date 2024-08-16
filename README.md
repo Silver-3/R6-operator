@@ -2,8 +2,7 @@
 # R6 Random Operator Discord Bot
 
 This is a simple Discord Bot to help give you random operators for Tom Clancy's: Rainbow Six Siege
-
-
+Add this bot with this link [here](https://discord.com/oauth2/authorize?client_id=1265222867470254112)
 
 ## Features
 
