@@ -29,6 +29,10 @@ module.exports = {
             const embed = new Discord.EmbedBuilder()
                 .setTitle(`Random loadout for ${operator.name}`)
                 .setColor('Blurple')
+                .setAuthor({
+                    name: `Requested by: ${interaction.user.globalName? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username}`,
+                    iconURL: interaction.user.displayAvatarURL()
+                })
                 .setThumbnail(`attachment://${operator.name.toLowerCase()}.png`)
                 .addFields(
                     { name: 'Loadout', value: ' ', inline: true },{ name: ' ', value: ' ', inline: true },{ name: ' ', value: ' ', inline: true },

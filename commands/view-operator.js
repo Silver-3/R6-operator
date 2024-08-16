@@ -31,6 +31,10 @@ module.exports = {
                 .setTitle(operator.name)
                 .setThumbnail(`attachment://${operatorName.toLowerCase()}.png`)
                 .setColor('Blurple')
+                .setAuthor({
+                    name: `Requested by: ${interaction.user.globalName? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username}`,
+                    iconURL: interaction.user.displayAvatarURL()
+                })
                 .addFields(
                     { name: 'Loadout', value: ' ', inline: true },{ name: ' ', value: ' ', inline: true },{ name: ' ', value: ' ', inline: true },
                     { name: 'Primary Weapons', value: operator.guns.primary.join(' | '), inline: true },

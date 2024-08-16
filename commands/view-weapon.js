@@ -31,6 +31,10 @@ module.exports = {
                 .setTitle(weapon.name)
                 .setColor('Blurple')
                 .setThumbnail(`attachment://${weapon.name.toLowerCase().replaceAll(' ', '_')}.png`)
+                .setAuthor({
+                    name: `Requested by: ${interaction.user.globalName? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username}`,
+                    iconURL: interaction.user.displayAvatarURL()
+                })
                 .addFields({
                     name: 'Stats',
                     value: ' ',

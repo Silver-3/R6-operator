@@ -62,6 +62,10 @@ module.exports = {
         const embed = new Discord.EmbedBuilder()
             .setTitle('Used Operators on ' + team)
             .setColor('Blurple')
+            .setAuthor({
+                name: `Requested by: ${interaction.user.globalName? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username}`,
+                iconURL: interaction.user.displayAvatarURL()
+            })
             .setDescription(
                 `**You have currently used:**\n${capitalizeArray(usedOperators).join(', ') || 'None'} (${usedOperators.length}/${operatorList.length})\n\n` +
                 `**You have not used:**\n${capitalizeArray(operatorList.filter(element => !usedOperators.includes(element))).join(', ') || 'None'} (${operatorList.length - usedOperators.length}/${operatorList.length})`)
