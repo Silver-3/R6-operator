@@ -14,6 +14,8 @@ Add this bot with this link [here](https://discord.com/oauth2/authorize?client_i
 - Reset your previously used operators data
 - Can get a random R6 map for 1v1s
 - Can view a map to get an image of it 
+- Can get a random weapon from R6 siege
+- Can view any weapon from R6 siege viewing the guns stats
 
 ## Terms of use
 
