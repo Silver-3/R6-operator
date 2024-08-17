@@ -19,7 +19,7 @@ module.exports = {
                 iconURL: interaction.user.displayAvatarURL()
             })
             .setColor('Blurple')
-            .setThumbnail(`attachment://${weapon.name.toLowerCase().replaceAll(' ', '_')}.png`)
+            .setImage(`attachment://${weapon.name.toLowerCase().replaceAll(' ', '_')}.png`)
             .addFields({
                 name: 'Additional Info',
                 value: ' ',
