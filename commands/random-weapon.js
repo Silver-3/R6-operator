@@ -21,42 +21,6 @@ module.exports = {
             .setColor('Blurple')
             .setThumbnail(`attachment://${weapon.name.toLowerCase().replaceAll(' ', '_')}.png`)
             .addFields({
-                name: 'Stats',
-                value: ' ',
-                inline: true
-            }, {
-                name: ' ',
-                value: ' ',
-                inline: true
-            }, {
-                name: ' ',
-                value: ' ',
-                inline: true
-            }, {
-                name: 'Damage',
-                value: `${weapon.stats.damage}`,
-                inline: true
-            }, {
-                name: 'Firerate',
-                value: `${weapon.stats.firerate == 1 ? `single fire` : `${weapon.stats.firerate} rpm (rounds per minute)`}`,
-                inline: true
-            }, {
-                name: 'Mag',
-                value: `${weapon.stats.ammo}`,
-                inline: true
-            }, {
-                name: 'Max capacity',
-                value: `${weapon.stats.maxammo}`,
-                inline: true
-            }, {
-                name: 'Control Difficulty',
-                value: `${weapon.stats.difficulty}`,
-                inline: true
-            }, {
-                name: ' ',
-                value: ' ',
-                inline: true
-            }, {
                 name: 'Additional Info',
                 value: ' ',
                 inline: true
