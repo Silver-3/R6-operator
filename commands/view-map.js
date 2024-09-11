@@ -24,7 +24,7 @@ module.exports = {
         let map;
 
         try {
-            map = R6Info.getMap(mapName);
+            map = R6Info.getMap(mapName.replace(' ', ''));
 
             const attachment = new Discord.AttachmentBuilder(map.image);
             const embed = new Discord.EmbedBuilder()
@@ -34,7 +34,7 @@ module.exports = {
                     name: `Requested by: ${interaction.user.globalName? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username}`,
                     iconURL: interaction.user.displayAvatarURL()
                 })
-                .setImage(`attachment://${map.name.toLowerCase().replace(' ', '')}.png`)
+                .setImage(`attachment://image.png`)
     
             interaction.reply({
                 embeds: [embed],

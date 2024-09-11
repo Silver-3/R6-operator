@@ -8,6 +8,17 @@ module.exports = {
      * @param {Discord.CommandInteraction} interaction 
      */
     usage: 'random-loadout <operator>',
+    autocomplete: async (interaction, client, db) => {
+        const value = interaction.options.getFocused().toLowerCase();
+        let choices = R6Info.getAllOperators().map(x => x.name);
+
+        const filtered = choices.filter(choice => choice.toLowerCase().includes(value)).slice(0, 25);
+
+        await interaction.respond(filtered.map(choice => ({
+            name: choice,
+            value: choice
+        })));
+    },
     run: async (interaction, client, db) => {
         const operatorName = interaction.options.getString("operator");
         let operator;
@@ -33,7 +44,7 @@ module.exports = {
                     name: `Requested by: ${interaction.user.globalName? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username}`,
                     iconURL: interaction.user.displayAvatarURL()
                 })
-                .setThumbnail(`attachment://${operator.name.toLowerCase()}.png`)
+                .setThumbnail(`attachment://icon.png`)
                 .addFields(
                     { name: 'Loadout', value: ' ', inline: true },{ name: ' ', value: ' ', inline: true },{ name: ' ', value: ' ', inline: true },
                     { name: 'Primary Weapon', value: loadout.primary, inline: true },
@@ -65,4 +76,5 @@ module.exports.data = new SlashCommand()
     .addStringOption(option => option
         .setName("operator")
         .setDescription("The name of the operator")
-        .setRequired(true))
+        .setRequired(true)
+        .setAutocomplete(true))

@@ -11,7 +11,7 @@ module.exports = {
     run: async (interaction, client) => {
         const weapon = R6Info.randomWeapon();
 
-        const attachment = new Discord.AttachmentBuilder(weapon.icon);
+        const attachment = new Discord.AttachmentBuilder(weapon.image);
         const embed = new Discord.EmbedBuilder()
             .setTitle(`The random weapon is: ${weapon.name}`)
             .setAuthor({
@@ -19,7 +19,7 @@ module.exports = {
                 iconURL: interaction.user.displayAvatarURL()
             })
             .setColor('Blurple')
-            .setImage(`attachment://${weapon.name.toLowerCase().replaceAll(' ', '_')}.png`)
+            .setImage(`attachment://image.png`)
             .addFields({
                 name: 'Additional Info',
                 value: ' ',

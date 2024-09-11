@@ -60,7 +60,7 @@ module.exports = {
             const embed = new Discord.EmbedBuilder()
                 .setTitle(`The random operator is: ${operator.name}`)
                 .setAuthor({ name: `Requested by: ${interaction.user.globalName ? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username}`, iconURL: interaction.user.displayAvatarURL()})
-                .setThumbnail(`attachment://${operator.name.toLowerCase()}.png`)
+                .setThumbnail(`attachment://icon.png`)
                 .setColor('Blurple')
                 .addFields({
                     name: 'Loadout',

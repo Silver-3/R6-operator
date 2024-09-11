@@ -17,7 +17,7 @@ module.exports = {
            .setTitle(`The random map is: ${map.name}`)
            .setAuthor({ name: `Requested by: ${interaction.user.globalName? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() })
            .setColor('Blurple')
-           .setImage(`attachment://${map.name.toLowerCase().replace(' ', '')}.png`)
+           .setImage(`attachment://image.png`)
 
         interaction.reply({
             embeds: [embed],

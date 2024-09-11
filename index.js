@@ -11,7 +11,6 @@ const client = new Discord.Client({
 client.commands = new Discord.Collection();
 client.config = config;
 
-
 (async () => {
     try {
         client.db = await mongodb(config.mongoURL);

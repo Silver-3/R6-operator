@@ -26,11 +26,11 @@ module.exports = {
         try {
             weapon = R6Info.getWeapon(weaponName);
 
-            const attachment = new Discord.AttachmentBuilder(weapon.icon);
+            const attachment = new Discord.AttachmentBuilder(weapon.image);
             const embed = new Discord.EmbedBuilder()
                 .setTitle(weapon.name)
                 .setColor('Blurple')
-                .setImage(`attachment://${weapon.name.toLowerCase().replaceAll(' ', '_')}.png`)
+                .setImage(`attachment://image.png`)
                 .setAuthor({
                     name: `Requested by: ${interaction.user.globalName? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username}`,
                     iconURL: interaction.user.displayAvatarURL()

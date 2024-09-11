@@ -29,7 +29,7 @@ module.exports = {
             const attachment = new Discord.AttachmentBuilder(operator.icon);
             const embed = new Discord.EmbedBuilder()
                 .setTitle(operator.name)
-                .setThumbnail(`attachment://${operatorName.toLowerCase()}.png`)
+                .setThumbnail(`attachment://icon.png`)
                 .setColor('Blurple')
                 .setAuthor({
                     name: `Requested by: ${interaction.user.globalName? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username}`,
