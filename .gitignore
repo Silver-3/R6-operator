@@ -1,9 +1,4 @@
 node_modules/
-events/messageCreate.js
-templates/
 config.json
 package-lock.json
-db.json
 *.sqlite
-*.bat
-*.txt

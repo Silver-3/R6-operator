@@ -1,30 +1,27 @@
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const fs = require('fs');
-const chalk = require('chalk').default;
+
+const commands = [];
 
 module.exports = async (client) => {
+
     const commandFiles = fs.readdirSync(`./commands/`).filter(file => file.endsWith('.js'));
 
-    for (const file of commandFiles) {
-        const command = require(`../commands/${file}`);
-        client.commands.set(command.data.name, command);
-        console.log(chalk.blue(`[COMMAND]`) + chalk.whiteBright(` ${command.data.name} has loaded`));
+    for (const commandFile of commandFiles) {
+        const file = require(`../commands/${commandFile}`);
+
+        client.commands.set(file.command.name, file);
+        commands.push(file.command.toJSON());
+
+        console.log(`[COMMAND] ${file.command.name} has loaded.`);
     }
 
-    console.log(chalk.green("[INFO]") + " Commands have loaded.");
+    console.log("[INFO] Commands have loaded.");
 }
 
 module.exports.load = async (client, guildId) => {
-    const commands = [];
     const clientId = client.user?.id;
-  
-    const commandFiles = fs.readdirSync(`./commands/`).filter(file => file.endsWith('.js'));
-    for (const file of commandFiles) {
-      const command = require(`../commands/${file}`);
-  
-      commands.push(command.data.toJSON());
-    }
   
     const rest = new REST({
       version: '9'
@@ -33,12 +30,11 @@ module.exports.load = async (client, guildId) => {
     try {
       await rest.put(
         Routes.applicationGuildCommands(clientId, guildId), {
-          body: commands
+          body: commands,
         },
       ); 
-      console.log(chalk.blue("[SLASH-COMMANDS]") + ` registered ${commands.length} commands in ${client.guilds.cache.get(guildId).name} (${guildId})`);
+      console.log(`[SLASH-COMMANDS] registered ${commands.length} commands in ${client.guilds.cache.get(guildId).name} (${guildId})`);
     } catch (error) {
       console.error(error);
     }
   };
-  

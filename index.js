@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const mongodb = require('./handlers/mongoDatabase');
+const QuickDB = require('quick.db').QuickDB;
 
 const config = require('./config.json');
 const client = new Discord.Client({
@@ -10,14 +10,7 @@ const client = new Discord.Client({
 
 client.commands = new Discord.Collection();
 client.config = config;
-
-(async () => {
-    try {
-        client.db = await mongodb(config.mongoURL);
-    } catch (error) {
-        console.error(`Error connecting to MongoDB: ${error.message}`);
-    }
-})();
+client.db = new QuickDB();
 
 ["commands", "events"].forEach(handler => {
     require(`./handlers/${handler}`)(client);

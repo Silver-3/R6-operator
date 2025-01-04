@@ -2,13 +2,7 @@ const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
 const R6Info = require('@silver-3/r6-info');
 
-module.exports = {
-    /**
-     * @param {Discord.Client} client 
-     * @param {Discord.CommandInteraction} interaction 
-     */
-    usage: 'view-weapon <weapon>',
-    autocomplete: async (interaction, client, db) => {
+module.exports.autocomplete = async (interaction, client, db) => {
         const value = interaction.options.getFocused().toLowerCase();
         let choices = R6Info.getAllWeapons().map(x => x.name);
 
@@ -19,7 +13,7 @@ module.exports = {
             value: choice
         })));
     },
-    run: async (interaction, client, db) => {
+    module.exports.run = async (interaction, client, db) => {
         const weaponName = interaction.options.getString('name');
         let weapon;
 
@@ -92,7 +86,7 @@ module.exports = {
                     value: weapon.operators.join(', '),
                     inline: true
                 })
-    
+
             interaction.reply({
                 embeds: [embed],
                 files: [attachment]
@@ -102,7 +96,7 @@ module.exports = {
                 .setTitle('Something went wrong')
                 .setColor('Red')
                 .setDescription('That weapon does not exist. Please check the spelling or use the provided auto complete.')
-            
+
             console.log(error);
 
             interaction.reply({
@@ -111,9 +105,13 @@ module.exports = {
             });
         }
     }
+
+module.exports.data = {
+    usage: '/view-weapon <weapon>',
+    category: 'View'
 }
 
-module.exports.data = new SlashCommand()
+module.exports.command = new SlashCommand()
     .setName("view-weapon")
     .setDescription("Request a weapon to view")
     .addStringOption(option => option

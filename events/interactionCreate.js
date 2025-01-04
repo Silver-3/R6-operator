@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const QuickDB = require('quick.db').QuickDB;
 
 module.exports = {
     name: 'interactionCreate',
@@ -6,6 +7,7 @@ module.exports = {
     /**
      * @param {Discord.Client} client 
      * @param {Discord.CommandInteraction} interaction 
+     * @param {QuickDB} db
      */
     run: async (interaction, client, db) => {
         if (interaction.isAutocomplete()) {
@@ -13,7 +15,7 @@ module.exports = {
             if (!command) return;
 
             try {
-                await command.autocomplete(interaction, client, db);
+                await command.autocomplete(interaction, client);
             } catch (error) {
                 console.log(error);
             }
@@ -29,7 +31,7 @@ module.exports = {
         try {
             await command.run(interaction, client, db);
         } catch (error) {
-            interaction.reply("Something went wrong\nPlease try again later");
+            interaction.reply("Something went wrong\n" + error.message);
             console.error(error);
         }
     }

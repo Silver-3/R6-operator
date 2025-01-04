@@ -1,30 +1,40 @@
 const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
 
-module.exports = {
-    /**
-     * @param {Discord.Client} client 
-     * @param {Discord.CommandInteraction} interaction 
-     */
-    usage: 'help',
-    run: async (interaction, client, db) => {
-        const embed = new Discord.EmbedBuilder()
-            .setTitle('Bots commands')
-            .setColor('Blurple')
-            .setFooter({ text: client.user.username, iconURL: client.user.displayAvatarURL() })
+module.exports.run = async (interaction, client, db) => {
+    const categories = new Set()
 
-        client.commands.forEach(command => {
-            embed.addFields(
-                { name: '/' + command.usage, value: command.data.description, inline: true }
-            )
-        });
+    const embed = new Discord.EmbedBuilder()
+        .setTitle('List of commands')
+        .setColor('Blurple')
+        .setAuthor({
+            name: interaction.member.user.username,
+            iconURL: interaction.member.displayAvatarURL(),
+        })
+        .setFooter({
+            text: interaction.guild.name,
+            iconURL: interaction.guild.iconURL(),
+        })
 
-        interaction.reply({
-            embeds: [embed]
-        });
-    }
+    client.commands.forEach(command => categories.add(command.data.category));
+
+    categories.forEach(category => {
+        embed.addFields({
+            name: category,
+            value: client.commands.filter(cmd => cmd.data.category === category).map(cmd => `\`${cmd.data.usage}\` - ${cmd.command.description}`).join('\n'),
+        })
+    });
+
+    interaction.reply({
+        embeds: [embed]
+    });
 }
 
-module.exports.data = new SlashCommand()
-    .setName("help")
-    .setDescription("View all the bots commands")
+module.exports.data = {
+    usage: '/help',
+    category: 'Information'
+}
+
+module.exports.command = new SlashCommand()
+    .setName('help')
+    .setDescription('View all the bots commands')

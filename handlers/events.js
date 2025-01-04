@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const chalk = require('chalk').default;
 
 module.exports = (client) => {
     const eventsFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
@@ -10,7 +9,7 @@ module.exports = (client) => {
         const event = require(filePath);
         const eventName = file.replace('.js', '');
 
-        console.log(chalk.yellow("[EVENT]") + ` ${eventName} has loaded.`);
+        console.log(`[EVENT] ${eventName} has loaded.`);
 
         if (event.once) {
             client.once(event.name, (...args) => event.run(...args, client, client.db));
@@ -19,5 +18,5 @@ module.exports = (client) => {
         }
     }
 
-    console.log(chalk.green("[INFO]") + " Events have loaded.");
+    console.log("[INFO] Events have loaded.");
 }

@@ -1,14 +1,15 @@
-const chalk = require('chalk').default;
 const Discord = require('discord.js');
+const QuickDB = require('quick.db').QuickDB;
 
 module.exports = {
     name: 'ready',
     once: true,
     /**
      * @param {Discord.Client} client 
+     * @param {QuickDB} db
      */
-    run: async (client) => {
-        console.log(chalk.red("[BOT]") + " Bot is online.");
+    run: async (client, db) => {
+        console.log("[BOT] Bot is online.");
 
         async function loadCommands() {
             const guilds = client.guilds.cache.map(guild => guild);
@@ -17,7 +18,7 @@ module.exports = {
         }
         
         loadCommands().then(() => {
-            console.log(chalk.green("[INFO]") + " Slash Commands have loaded.");
+            console.log("[INFO] Slash Commands have loaded.");
         });
     }
 }
