@@ -17,7 +17,7 @@ module.exports.run = async (interaction, client, db) => {
 
     if (!await db.has(interaction.user.id)) return interaction.reply({
         embeds: [error1],
-        ephemeral: true
+        flags: Discord.MessageFlags.Ephemeral
     });
 
     let operatorList = team == 'attack' ? R6Info.getAttackers() : R6Info.getDefenders();
@@ -33,7 +33,7 @@ module.exports.run = async (interaction, client, db) => {
 
     if (usedOperators == null || usedOperators.length == 0) return interaction.reply({
         embeds: [error2],
-        ephemeral: true
+        flags: Discord.MessageFlags.Ephemeral
     });
 
     usedOperators.sort((a, b) => {

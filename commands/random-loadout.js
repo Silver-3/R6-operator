@@ -78,7 +78,7 @@ module.exports.run = async (interaction, client, db) => {
 
         interaction.reply({
             embeds: [embed],
-            ephemeral: true
+            flags: Discord.MessageFlags.Ephemeral
         });
     }
 }

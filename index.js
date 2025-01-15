@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const QuickDB = require('quick.db').QuickDB;
-
 const config = require('./config.json');
+
 const client = new Discord.Client({
     intents: Object.keys(Discord.GatewayIntentBits).map((intent) => {
         return Discord.GatewayIntentBits[intent]

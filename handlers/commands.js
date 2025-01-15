@@ -17,6 +17,11 @@ module.exports = async (client) => {
         console.log(`[COMMAND] ${file.command.name} has loaded.`);
     }
 
+    commands.forEach(command => {
+      command['contexts'] = [0, 1, 2];
+      command['integration_types'] = [0, 1]
+    });
+
     console.log("[INFO] Commands have loaded.");
 }
 
@@ -29,7 +34,7 @@ module.exports.load = async (client, guildId) => {
   
     try {
       await rest.put(
-        Routes.applicationGuildCommands(clientId, guildId), {
+        Routes.applicationCommands(clientId, guildId), {
           body: commands,
         },
       ); 

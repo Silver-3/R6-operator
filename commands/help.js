@@ -2,18 +2,14 @@ const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
 
 module.exports.run = async (interaction, client, db) => {
-    const categories = new Set()
+    const categories = new Set();
 
     const embed = new Discord.EmbedBuilder()
         .setTitle('List of commands')
         .setColor('Blurple')
         .setAuthor({
-            name: interaction.member.user.username,
-            iconURL: interaction.member.displayAvatarURL(),
-        })
-        .setFooter({
-            text: interaction.guild.name,
-            iconURL: interaction.guild.iconURL(),
+            name: interaction.user.username,
+            iconURL: interaction.user.displayAvatarURL(),
         })
 
     client.commands.forEach(command => categories.add(command.data.category));
