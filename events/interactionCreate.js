@@ -21,6 +21,7 @@ module.exports = {
             }
         }
 
+        if (interaction.isButton() && interaction.customId.startsWith('random_')) return await client.commands.get('dev-random').button(interaction, client);
         if (!interaction.isCommand()) return;
 
         const commandName = interaction.commandName

@@ -152,10 +152,14 @@ module.exports.run = async (interaction, client, db) => {
         });
 
         collector.on('end', () => {
-            interaction.editReply({
-                embeds: [embed],
-                components: []
-            });
+            try {
+                interaction.editReply({
+                    embeds: [embed],
+                    components: []
+                });
+            } catch (error) {
+                
+            }
         })
     }).catch(error => {
         const embed = new Discord.EmbedBuilder()

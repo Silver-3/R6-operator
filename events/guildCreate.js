@@ -8,7 +8,7 @@ module.exports = {
      * @param {Discord.Client} client
      */
     run: async (guild, client) => {
-        require(`../handlers/loadCommands`)(client, guild.id);
+        require(`../handlers/commands`).load(client, guild.id);
 
         console.log('------------------------');
         console.log('[EVENT] added to new guild');
