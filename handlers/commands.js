@@ -36,7 +36,7 @@ module.exports.load = async (client, guildId) => {
       await rest.put(
         Routes.applicationCommands(clientId, guildId), {
           body: commands,
-        },
+        }
       ); 
       console.log(`[SLASH-COMMANDS] registered ${commands.length} commands in ${client.guilds.cache.get(guildId).name} (${guildId})`);
     } catch (error) {

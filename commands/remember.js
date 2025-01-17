@@ -1,5 +1,12 @@
-const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
+const QuickDB = require('quick.db').QuickDB;
+
+/**
+ * 
+ * @param {Discord.Interaction} interaction 
+ * @param {Discord.Client} client 
+ * @param {QuickDB} db
+ */
 
 module.exports.run = async (interaction, client, db) => {
     let choice = interaction.options.getString("choice");
@@ -30,7 +37,7 @@ module.exports.data = {
 }
 
 
-module.exports.command = new SlashCommand()
+module.exports.command = new Discord.SlashCommandBuilder()
     .setName("remember")
     .setDescription("Have the bot remember your used operators so you dont get the same operators again")
     .addStringOption(option => option

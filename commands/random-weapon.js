@@ -1,6 +1,11 @@
-const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
 const R6Info = require('@silver-3/r6-info');
+
+/**
+ * 
+ * @param {Discord.Interaction} interaction 
+ * @param {Discord.Client} client 
+ */
 
 module.exports.run = async (interaction, client) => {
     const weapon = R6Info.randomWeapon();
@@ -51,6 +56,6 @@ module.exports.data = {
     category: 'Random'
 }
 
-module.exports.command = new SlashCommand()
+module.exports.command = new Discord.SlashCommandBuilder()
     .setName("random-weapon")
     .setDescription("Gives you a random weapon")

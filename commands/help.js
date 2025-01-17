@@ -1,7 +1,12 @@
-const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
 
-module.exports.run = async (interaction, client, db) => {
+/**
+ * 
+ * @param {Discord.Interaction} interaction 
+ * @param {Discord.Client} client 
+ */
+
+module.exports.run = async (interaction, client) => {
     const categories = new Set();
 
     const embed = new Discord.EmbedBuilder()
@@ -17,7 +22,7 @@ module.exports.run = async (interaction, client, db) => {
     categories.forEach(category => {
         embed.addFields({
             name: category,
-            value: client.commands.filter(cmd => cmd.data.category === category).filter(cmd => cmd.data?.restricted !== true).map(cmd => `\`${cmd.data.usage}\` - ${cmd.command.description}`).join('\n'),
+            value: client.commands.filter(cmd => cmd.data.category === category).map(cmd => `\`${cmd.data.usage}\` - ${cmd.command.description}`).join('\n'),
         })
     });
 
@@ -31,6 +36,6 @@ module.exports.data = {
     category: 'Information'
 }
 
-module.exports.command = new SlashCommand()
+module.exports.command = new Discord.SlashCommandBuilder()
     .setName('help')
     .setDescription('View all the bots commands')

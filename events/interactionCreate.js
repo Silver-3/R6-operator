@@ -21,7 +21,10 @@ module.exports = {
             }
         }
 
-        if (interaction.isButton() && interaction.customId.startsWith('random_')) return await client.commands.get('dev-random').button(interaction, client);
+        if (interaction.isButton() && interaction.customId.startsWith('random_')) await client.commands.get('dev-random').button(interaction, client);
+        if (interaction.isButton() && interaction.customId == 'challenge') await client.commands.get('random-challenge').button(interaction, client);
+        if (interaction.isModalSubmit() && interaction.customId == 'modal_eval') await client.commands.get('eval').modal(interaction, client);
+        
         if (!interaction.isCommand()) return;
 
         const commandName = interaction.commandName
@@ -30,6 +33,8 @@ module.exports = {
         if (!command) return
 
         try {
+            if (command.data.category == 'Developer' && interaction.user.id !== client.config.devId) return interaction.reply({ content: '❌ You aren\'t allowed to use this command', flags: Discord.MessageFlags.Ephemeral });
+
             await command.run(interaction, client, db);
         } catch (error) {
             interaction.reply("Something went wrong\n" + error.message);

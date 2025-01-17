@@ -1,5 +1,12 @@
-const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
+const QuickDB = require('quick.db').QuickDB;
+
+/**
+ * 
+ * @param {Discord.Interaction} interaction 
+ * @param {Discord.Client} client 
+ * @param {QuickDB} db
+ */
 
 module.exports.run = async (interaction, client, db) => {
     const team = interaction.options.getString('team');
@@ -80,7 +87,7 @@ module.exports.data = {
     category: 'Settings'
 }
 
-module.exports.command = new SlashCommand()
+module.exports.command = new Discord.SlashCommandBuilder()
     .setName("reset")
     .setDescription("Reset used operators data")
     .addStringOption(option => option

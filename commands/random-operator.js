@@ -1,6 +1,13 @@
-const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
+const QuickDB = require('quick.db').QuickDB;
 const R6Info = require('@silver-3/r6-info');
+
+/**
+ * 
+ * @param {Discord.Interaction} interaction 
+ * @param {Discord.Client} client 
+ * @param {QuickDB} db
+ */
 
 module.exports.run = async (interaction, client, db) => {
     const team = interaction.options.getString('team');
@@ -181,7 +188,7 @@ module.exports.data = {
     category: 'Random'
 }
 
-module.exports.command = new SlashCommand()
+module.exports.command = new Discord.SlashCommandBuilder()
     .setName('random-operator')
     .setDescription('Get a random operator from the selected team')
     .addStringOption(option => option

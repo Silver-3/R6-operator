@@ -1,8 +1,13 @@
-const SlashCommand = require('@discordjs/builders').SlashCommandBuilder;
 const Discord = require('discord.js');
 const R6Info = require('@silver-3/r6-info');
 
-module.exports.autocomplete = async (interaction, client, db) => {
+/**
+ * 
+ * @param {Discord.Interaction} interaction 
+ * @param {Discord.Client} client 
+ */
+
+module.exports.autocomplete = async (interaction, client) => {
     const value = interaction.options.getFocused().toLowerCase();
     let choices = R6Info.getAllOperators().map(x => x.name);
 
@@ -13,7 +18,14 @@ module.exports.autocomplete = async (interaction, client, db) => {
         value: choice
     })));
 }
-module.exports.run = async (interaction, client, db) => {
+
+/**
+ * 
+ * @param {Discord.Interaction} interaction 
+ * @param {Discord.Client} client 
+ */
+
+module.exports.run = async (interaction, client) => {
     const operatorName = interaction.options.getString("operator");
     let operator;
 
@@ -145,7 +157,7 @@ module.exports.data = {
     category: 'View'
 }
 
-module.exports.command = new SlashCommand()
+module.exports.command = new Discord.SlashCommandBuilder()
     .setName("view-operator")
     .setDescription("View any operator information")
     .addStringOption(option => option
