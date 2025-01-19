@@ -51,7 +51,7 @@ module.exports.data = {
 
 module.exports.command = new Discord.SlashCommandBuilder()
     .setName('reload')
-    .setDescription('Reload all the slash commands')
+    .setDescription('Reload a slash command')
     .addStringOption(option => option
         .setName('command')
         .setDescription('Name of the command to reload')

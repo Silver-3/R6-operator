@@ -19,6 +19,8 @@ module.exports.run = async (interaction, client) => {
         "Crouched Only",
         "Prone Only",
         "Random Operator (/random-operator)",
+        "Random Scope (/random-scope",
+        "Random Loadout (/random-loadout)",
         "Let The Game Pick Your Operator",
         "Burst Fire Only (5 max)",
         "No Drones & Cams",

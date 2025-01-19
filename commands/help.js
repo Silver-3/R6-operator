@@ -22,7 +22,7 @@ module.exports.run = async (interaction, client) => {
     categories.forEach(category => {
         embed.addFields({
             name: category,
-            value: client.commands.filter(cmd => cmd.data.category === category).map(cmd => `\`${cmd.data.usage}\` - ${cmd.command.description}`).join('\n'),
+            value: client.commands.filter(cmd => cmd.data.category === category).map(cmd => `\`${cmd.data.usage}\` - ${cmd.command.description}`).join('\n')
         })
     });
 

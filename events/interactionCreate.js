@@ -33,7 +33,7 @@ module.exports = {
         if (!command) return
 
         try {
-            if (command.data.category == 'Developer' && interaction.user.id !== client.config.devId) return interaction.reply({ content: '❌ You aren\'t allowed to use this command', flags: Discord.MessageFlags.Ephemeral });
+            if (command.data.category == 'Developer' && !client.config.devId.includes(interaction.user.id)) return interaction.reply({ content: '❌ You aren\'t allowed to use this command', flags: Discord.MessageFlags.Ephemeral });
 
             await command.run(interaction, client, db);
         } catch (error) {

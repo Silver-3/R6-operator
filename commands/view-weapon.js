@@ -9,7 +9,7 @@ const R6Info = require('@silver-3/r6-info');
 
 module.exports.autocomplete = async (interaction, client) => {
     const value = interaction.options.getFocused().toLowerCase();
-    let choices = R6Info.getAllWeapons().map(x => x.name);
+    const choices = R6Info.getAllWeapons().map(x => x.name);
 
     const filtered = choices.filter(choice => choice.toLowerCase().includes(value)).slice(0, 25);
 
