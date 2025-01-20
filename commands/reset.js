@@ -26,7 +26,7 @@ module.exports.run = async (interaction, client, db) => {
 
     const embed = new Discord.EmbedBuilder()
         .setTitle('Confirmation')
-        .setDescription(`Are you sure you want to reset your data on used ${team == 'attack' ? 'attacker' : 'defender'} operators?`)
+        .setDescription(`Are you sure you want to reset your data on ${team == 'all' ? 'all used' : `used ${team == 'attack' ? 'attacker' : 'defender'}`} operators?`)
         .setColor('Blurple')
         .setFooter({
             text: 'This can not be undone'
@@ -39,7 +39,7 @@ module.exports.run = async (interaction, client, db) => {
 
     const confirmEmbed = new Discord.EmbedBuilder()
         .setTitle('Reset confirmed')
-        .setDescription(`Data on used ${team == 'attack' ? 'attackers' : 'defenders'} has been reset`)
+        .setDescription(`Data on ${team == 'all' ? 'all used' : `used ${team == 'attack' ? 'attacker' : 'defender'}`} operators has been reset`)
         .setColor('Blurple')
 
     const cancelEmbed = new Discord.EmbedBuilder()
@@ -61,7 +61,9 @@ module.exports.run = async (interaction, client, db) => {
         });
 
         if (confirmation.customId == 'reset_confirm') {
-            db.delete(`${interaction.user.id}.operators.${team}`);
+            if (team == 'all') db.delete(`${interaction.user.id}.operators`);
+            else db.delete(`${interaction.user.id}.operators.${team}`);
+
             await confirmation.update({
                 embeds: [confirmEmbed],
                 components: []
@@ -92,8 +94,11 @@ module.exports.command = new Discord.SlashCommandBuilder()
     .setDescription("Reset used operators data")
     .addStringOption(option => option
         .setName("team")
-        .setDescription("Attack or Defense team")
+        .setDescription("Attack, Defense or Both teams")
         .addChoices({
+            name: 'All',
+            value: 'all'
+        },{
             name: 'Attack',
             value: 'attack'
         }, {

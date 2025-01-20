@@ -110,20 +110,20 @@ module.exports.run = async (interaction, client, db) => {
                 inline: true
             }, )
 
+        const embed2 = new Discord.EmbedBuilder()
+            .setColor('Blurple')
+            .setDescription('Note: This operator has been added to your used operator. You can disable this with \`/remember deactivate\`\n-# *You can view your used operators with \`/used-operators\`*')
+
+        let embeds = [embed];
+
         if (await db.has(interaction.user.id)) {
-            embed.setFooter({
-                text: 'Note: This operator has been added to used operators. Disable this with /remember disable'
-            });
-            embed.addFields({
-                name: ' ',
-                value: `\n\n*You can view your used operators with \`/used-operators\`*`,
-            }, )
+            embeds.push(embed2);
 
             db.push(`${interaction.user.id}.operators.${team}`, operator.name.toLowerCase());
-        }
+        } 
 
         const response = await interaction.reply({
-            embeds: [embed],
+            embeds: embeds,
             files: [attachment],
             components: [row]
         });
