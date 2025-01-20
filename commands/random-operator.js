@@ -152,7 +152,7 @@ module.exports.run = async (interaction, client, db) => {
                 embed.data.fields[5].name = 'Gadget', embed.data.fields[5].value = loadout.gadget;
 
                 await i.update({
-                    embeds: [embed],
+                    embeds: embeds,
                     components: []
                 });
             }
@@ -161,7 +161,7 @@ module.exports.run = async (interaction, client, db) => {
         collector.on('end', () => {
             try {
                 interaction.editReply({
-                    embeds: [embed],
+                    embeds: embeds,
                     components: []
                 });
             } catch (error) {
