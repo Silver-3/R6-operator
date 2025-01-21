@@ -1,7 +1,6 @@
-
 # R6 Random Operator Discord Bot
 
-This is a simple Discord Bot to help give you random operators for Tom Clancy's: Rainbow Six Siege
+This is a simple Discord Bot to help give you random operators for Tom Clancy's Rainbow Six: Siege
 
 ## Features
 
@@ -12,9 +11,8 @@ This is a simple Discord Bot to help give you random operators for Tom Clancy's:
 - View an operators information
 - Reset your previously used operators data
 - Can get a random R6 map for 1v1s
-- Can view a map to get an image of it 
-- Can get a random weapon from R6 siege
 - Can view any weapon from R6 siege viewing the guns stats
+- And more
 
 ## Terms of use
 
