@@ -50,11 +50,6 @@ module.exports.run = async (interaction, client) => {
     interaction.reply({ embeds: [embed] });
 }
 
-module.exports.data = {
-    usage: '/random-scope [2.5x] [3.5x]',
-    category: 'Random'
-}
-
 module.exports.command = new Discord.SlashCommandBuilder()
     .setName("random-scope")
     .setDescription("Gives you a random scope")

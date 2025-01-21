@@ -31,11 +31,6 @@ module.exports.run = async (interaction, client, db) => {
     }
 }
 
-module.exports.data = {
-    usage: '/remember <activate/deactivate>',
-    category: 'Settings'
-}
-
 
 module.exports.command = new Discord.SlashCommandBuilder()
     .setName("remember")

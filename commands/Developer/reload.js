@@ -8,7 +8,7 @@ const Discord = require('discord.js');
 
 module.exports.autocomplete = async (interaction, client) => {
     const value = interaction.options.getFocused().toLowerCase();
-    const choices = client.commands.map((command) => command.command.name);
+    const choices = client.commands.map((command) => command.data.name);
     
     const filtered = choices.filter(choice => choice.toLowerCase().includes(value)).slice(0, 25);
     
@@ -31,22 +31,20 @@ module.exports.run = async (interaction, client) => {
     try {
         if (!command) return interaction.reply({ content: `❌ Unknown command: ${commandName.toLowerCase()}`, flags: Discord.MessageFlags.Ephemeral });
 
-        delete require.cache[require.resolve(`./${command.command.name}.js`)];
+        delete require.cache[require.resolve(`../${command.data.category}/${command.data.name}.js`)];
 
-        const updatedCommand = require(`./${command.command.name}.js`);
-        client.commands.set(updatedCommand.command.name, updatedCommand);
+        const updatedCommand = require(`../${command.data.category}/${command.data.name}.js`);
+        updatedCommand.data = command.data;
+        updatedCommand.data.description = updatedCommand.data.description;
 
-        interaction.reply({ content: `✅ Reloaded \`${updatedCommand.command.name}\``, flags: Discord.MessageFlags.Ephemeral });
-        console.log(`[SLASH-COMMANDS] Reloaded ${updatedCommand.command.name}`);
+        client.commands.set(updatedCommand.data.name, updatedCommand);
+
+        interaction.reply({ content: `✅ Reloaded \`${updatedCommand.data.name}\``, flags: Discord.MessageFlags.Ephemeral });
+        console.log(`[SLASH-COMMANDS] Reloaded ${updatedCommand.data.name}`);
     } catch (error) {
         interaction.reply({ content: `❌ Failed to reload command, check console for details.`, flags: Discord.MessageFlags.Ephemeral });
         console.error(`[SLASH-COMMANDS] Error reloading command:`, error);
     }
-}
-
-module.exports.data = {
-    usage: '/reload <command>',
-    category: 'Developer'
 }
 
 module.exports.command = new Discord.SlashCommandBuilder()

@@ -84,11 +84,6 @@ module.exports.run = async (interaction, client, db) => {
     }
 }
 
-module.exports.data = {
-    usage: '/reset <team>',
-    category: 'Settings'
-}
-
 module.exports.command = new Discord.SlashCommandBuilder()
     .setName("reset")
     .setDescription("Reset used operators data")

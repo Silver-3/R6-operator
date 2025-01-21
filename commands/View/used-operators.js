@@ -83,11 +83,6 @@ module.exports.run = async (interaction, client, db) => {
     });
 }
 
-module.exports.data = {
-    usage: '/used-operators',
-    category: 'View'
-}
-
 module.exports.command = new Discord.SlashCommandBuilder()
     .setName("used-operators")
     .setDescription("Shows you all the operators you have used")

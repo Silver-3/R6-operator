@@ -112,11 +112,6 @@ module.exports.button = async (interaction, client) => {
     }
 }
 
-module.exports.data = {
-    usage: '/dev-random <team>',
-    category: 'Developer'
-}
-
 module.exports.command = new Discord.SlashCommandBuilder()
     .setName("dev-random")
     .setDescription("Modified random opeator")

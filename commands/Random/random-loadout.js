@@ -94,11 +94,6 @@ module.exports.run = async (interaction, client) => {
     }
 }
 
-module.exports.data = {
-    usage: '/random-loadout <operator>',
-    category: 'Random'
-}
-
 module.exports.command = new Discord.SlashCommandBuilder()
     .setName("random-loadout")
     .setDescription("Gives you a random loadout on a chosen operator")

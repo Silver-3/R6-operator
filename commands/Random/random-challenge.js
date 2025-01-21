@@ -40,11 +40,6 @@ module.exports.run = async (interaction, client) => {
     interaction.reply({ embeds: [embed] });
 }
 
-module.exports.data = {
-    usage: '/random-challenge',
-    category: 'Random'
-}
-
 module.exports.command = new Discord.SlashCommandBuilder()
     .setName("random-challenge")
     .setDescription("Gives you a random challenge if you want to try something different")

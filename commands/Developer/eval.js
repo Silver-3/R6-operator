@@ -132,11 +132,6 @@ module.exports.modal = async (interaction, client) => {
     }
 }
 
-module.exports.data = {
-    usage: '/eval',
-    category: 'Developer'
-}
-
 module.exports.command = new Discord.SlashCommandBuilder()
     .setName("eval")
     .setDescription("Allows dev to run code")

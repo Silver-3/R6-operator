@@ -112,7 +112,7 @@ module.exports.run = async (interaction, client, db) => {
 
         const embed2 = new Discord.EmbedBuilder()
             .setColor('Blurple')
-            .setDescription('Note: This operator has been added to your used operator. You can disable this with \`/remember deactivate\`\n-# *You can view your used operators with \`/used-operators\`*')
+            .setDescription('Note: This operator has been added to your used operators. You can disable this with \`/remember deactivate\`\n-# *You can view your used operators with \`/used-operators\`*')
 
         let embeds = [embed];
 
@@ -181,11 +181,6 @@ module.exports.run = async (interaction, client, db) => {
             embeds: [embed]
         });
     });
-}
-
-module.exports.data = {
-    usage: '/random-operator <team>',
-    category: 'Random'
 }
 
 module.exports.command = new Discord.SlashCommandBuilder()

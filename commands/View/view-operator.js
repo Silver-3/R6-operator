@@ -152,11 +152,6 @@ module.exports.run = async (interaction, client) => {
     }
 }
 
-module.exports.data = {
-    usage: '/view-operator <operator>',
-    category: 'View'
-}
-
 module.exports.command = new Discord.SlashCommandBuilder()
     .setName("view-operator")
     .setDescription("View any operator information")

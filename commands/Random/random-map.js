@@ -27,12 +27,6 @@ module.exports.run = async (interaction, client) => {
     });
 }
 
-
-module.exports.data = {
-    usage: '/random-map <map>',
-    category: 'Random'
-}
-
 module.exports.command = new Discord.SlashCommandBuilder()
     .setName("random-map")
     .setDescription("Get a random map, useful for random map 1v1s")

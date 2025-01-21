@@ -118,11 +118,6 @@ module.exports.run = async (interaction, client) => {
     }
 }
 
-module.exports.data = {
-    usage: '/view-weapon <weapon>',
-    category: 'View'
-}
-
 module.exports.command = new Discord.SlashCommandBuilder()
     .setName("view-weapon")
     .setDescription("Request a weapon to view")
