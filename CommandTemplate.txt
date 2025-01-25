@@ -10,11 +10,6 @@ module.exports.run = async (interaction, client) => {
     
 }
 
-module.exports.data = {
-    usage: '',
-    category: ''
-}
-
 module.exports.command = new Discord.SlashCommandBuilder()
     .setName('')
     .setDescription('')
