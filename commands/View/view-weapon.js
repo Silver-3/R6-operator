@@ -21,7 +21,7 @@ module.exports.autocomplete = async (interaction, client) => {
 
 /**
  * 
- * @param {Discord.Interaction} interaction 
+ * @param {Discord.CommandInteraction} interaction 
  * @param {Discord.Client} client 
  */
 

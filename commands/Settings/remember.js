@@ -3,7 +3,7 @@ const QuickDB = require('quick.db').QuickDB;
 
 /**
  * 
- * @param {Discord.Interaction} interaction 
+ * @param {Discord.CommandInteraction} interaction 
  * @param {Discord.Client} client 
  * @param {QuickDB} db
  */
