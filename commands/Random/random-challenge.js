@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 /**
  * 
- * @param {Discord.Interaction} interaction 
+ * @param {Discord.CommandInteraction} interaction 
  * @param {Discord.Client} client 
  */
 

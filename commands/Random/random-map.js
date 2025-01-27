@@ -3,7 +3,7 @@ const R6Info = require('@silver-3/r6-info');
 
 /**
  * 
- * @param {Discord.Interaction} interaction 
+ * @param {Discord.CommandInteraction} interaction 
  * @param {Discord.Client} client 
  */
 

@@ -3,7 +3,7 @@ const R6Info = require('@silver-3/r6-info');
 
 /**
  * 
- * @param {Discord.Interaction} interaction 
+ * @param {Discord.CommandInteraction} interaction 
  * @param {String} team 
  * @returns {{ embed: Discord.Embed, attachment: Discord.Attachment }} 
  */
@@ -33,7 +33,7 @@ async function randomOperator(interaction, team) {
 
 /**
  * 
- * @param {Discord.Interaction} interaction 
+ * @param {Discord.CommandInteraction} interaction 
  * @param {Discord.Client} client
  */
 
@@ -95,7 +95,7 @@ module.exports.run = async (interaction, client) => {
  */
 
 module.exports.button = async (interaction, client) => {
-    if (interaction.user.id == client.config.devId) {
+    if (client.config.devId.includes(interaction.user.id)) {
         const team = interaction.customId.replace('random_', '');
         const channel = interaction?.channel || interaction.user;
 

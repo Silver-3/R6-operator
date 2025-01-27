@@ -6,7 +6,7 @@ const util = require('util');
 
 /**
  * 
- * @param {Discord.Interaction} interaction 
+ * @param {Discord.CommandInteraction} interaction 
  * @param {Discord.Client} client 
  * @param {QuickDB} db 
  */
