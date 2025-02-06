@@ -1,12 +1,14 @@
 const Discord = require('discord.js');
+const QuickDB = require('quick.db').QuickDB;
 
 /**
  * 
  * @param {Discord.CommandInteraction} interaction 
  * @param {Discord.Client} client 
+ * @param {QuickDB} db
  */
 
-module.exports.run = async (interaction, client) => {
+module.exports.run = async (interaction, client, db) => {
     const challenges = [
         "Recruit Only",
         "Shield Ops",
@@ -19,7 +21,7 @@ module.exports.run = async (interaction, client) => {
         "Crouched Only",
         "Prone Only",
         "Random Operator (/random-operator)",
-        "Random Scope (/random-scope",
+        "Random Scope (/random-scope)",
         "Random Loadout (/random-loadout)",
         "Let The Game Pick Your Operator",
         "Burst Fire Only (5 max)",
@@ -32,12 +34,21 @@ module.exports.run = async (interaction, client) => {
     const randomNumber = Math.floor(Math.random() * challenges.length);
     const randomChallenge = challenges[randomNumber];
 
+    let visibleMessage = await db.get(`${interaction.user.id}.invisibleMessages`);
+    if (!visibleMessage) visibleMessage = false;
+
     const embed = new Discord.EmbedBuilder()
         .setColor('Blurple')
-        .setAuthor({ name: `Requested by: ${interaction.user.globalName ? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username}`, iconURL: interaction.user.displayAvatarURL()})
+        .setAuthor({
+            name: `Requested by: ${interaction.user.globalName ? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username}`,
+            iconURL: interaction.user.displayAvatarURL()
+        })
         .setDescription(`Your random challenge is: ${randomChallenge}`)
 
-    interaction.reply({ embeds: [embed] });
+    interaction.reply({
+        embeds: [embed],
+        flags: visibleMessage ? Discord.MessageFlags.Ephemeral : ''
+    });
 }
 
 module.exports.command = new Discord.SlashCommandBuilder()

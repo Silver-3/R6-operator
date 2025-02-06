@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const QuickDB = require('quick.db').QuickDB;
 const R6Info = require('@silver-3/r6-info');
 
 /**
@@ -23,11 +24,15 @@ module.exports.autocomplete = async (interaction, client) => {
  * 
  * @param {Discord.CommandInteraction} interaction 
  * @param {Discord.Client} client 
+ * @param {QuickDB} db
  */
 
-module.exports.run = async (interaction, client) => {
+module.exports.run = async (interaction, client, db) => {
     const operatorName = interaction.options.getString("operator");
     let operator;
+
+    let visibleMessage = await db.get(`${interaction.user.id}.invisibleMessages`);
+    if (!visibleMessage) visibleMessage = false;
 
     try {
         operator = R6Info.getOperator(operatorName);
@@ -137,7 +142,8 @@ module.exports.run = async (interaction, client) => {
 
         interaction.reply({
             embeds: [embed],
-            files: [attachment]
+            files: [attachment],
+            flags: visibleMessage ? Discord.MessageFlags.Ephemeral : ''
         });
     } catch (error) {
         const embed = new Discord.EmbedBuilder()

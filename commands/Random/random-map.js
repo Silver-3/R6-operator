@@ -1,15 +1,20 @@
 const Discord = require('discord.js');
+const QuickDB = require('quick.db').QuickDB;
 const R6Info = require('@silver-3/r6-info');
 
 /**
  * 
  * @param {Discord.CommandInteraction} interaction 
  * @param {Discord.Client} client 
+ * @param {QuickDB} db
  */
 
-module.exports.run = async (interaction, client) => {
+module.exports.run = async (interaction, client, db) => {
     const type = interaction.options.getString('type');
     const map = R6Info.randomMap(type);
+
+    let visibleMessage = await db.get(`${interaction.user.id}.invisibleMessages`);
+    if (!visibleMessage) visibleMessage = false;
 
     const attachment = new Discord.AttachmentBuilder(map.image);
     const embed = new Discord.EmbedBuilder()
@@ -23,7 +28,8 @@ module.exports.run = async (interaction, client) => {
 
     interaction.reply({
         embeds: [embed],
-        files: [attachment]
+        files: [attachment],
+        flags: visibleMessage ? Discord.MessageFlags.Ephemeral : ''
     });
 }
 

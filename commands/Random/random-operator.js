@@ -12,6 +12,9 @@ const R6Info = require('@silver-3/r6-info');
 module.exports.run = async (interaction, client, db) => {
     const team = interaction.options.getString('team');
 
+    let visibleMessage = await db.get(`${interaction.user.id}.invisibleMessages`);
+    if (!visibleMessage) visibleMessage = false;
+
     let operatorList = team == 'attack' ? R6Info.getAttackers() : R6Info.getDefenders();
     operatorList = operatorList.map(operator => {
         return operator[Object.keys(operator)[0]].name.toLowerCase();
@@ -125,7 +128,8 @@ module.exports.run = async (interaction, client, db) => {
         const response = await interaction.reply({
             embeds: embeds,
             files: [attachment],
-            components: [row]
+            components: [row],
+            flags: visibleMessage ? Discord.MessageFlags.Ephemeral : ''
         });
 
         const collector = await response.createMessageComponentCollector({
@@ -178,7 +182,8 @@ module.exports.run = async (interaction, client, db) => {
             });
 
         return interaction.reply({
-            embeds: [embed]
+            embeds: [embed],
+            flags: visibleMessage ? Discord.MessageFlags.Ephemeral : ''
         });
     });
 }

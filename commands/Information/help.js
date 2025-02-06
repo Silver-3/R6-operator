@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const QuickDB = require('quick.db').QuickDB;
 
 /**
  * 
@@ -22,11 +23,15 @@ module.exports.autocomplete = async (interaction, client) => {
  * 
  * @param {Discord.CommandInteraction} interaction 
  * @param {Discord.Client} client 
+ * @param {QuickDB} db
  */
 
-module.exports.run = async (interaction, client) => {
+module.exports.run = async (interaction, client, db) => {
     const commandInput = interaction.options.getString('command');
     const categories = new Set();
+
+    let visibleMessage = await db.get(`${interaction.user.id}.invisibleMessages`);
+    if (!visibleMessage) visibleMessage = false;
 
     if (commandInput) {
         const command = client.commands.get(commandInput.toLowerCase());
@@ -61,7 +66,8 @@ module.exports.run = async (interaction, client) => {
 
 
         interaction.reply({
-            embeds: [embed]
+            embeds: [embed],
+            flags: visibleMessage ? Discord.MessageFlags.Ephemeral : ''
         });
     } else {
         const embed = new Discord.EmbedBuilder()
@@ -82,7 +88,8 @@ module.exports.run = async (interaction, client) => {
         });
 
         interaction.reply({
-            embeds: [embed]
+            embeds: [embed],
+            flags: visibleMessage ? Discord.MessageFlags.Ephemeral : ''
         });
     }
 }

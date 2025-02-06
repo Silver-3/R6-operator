@@ -20,6 +20,9 @@ module.exports.run = async (interaction, client, db) => {
         flags: Discord.MessageFlags.Ephemeral
     });
 
+    let visibleMessage = await db.get(`${interaction.user.id}.invisibleMessages`);
+    if (!visibleMessage) visibleMessage = false;
+
     // Attacker
 
     let usedAttackers = await db.get(`${interaction.user.id}.operators.attack`);
@@ -79,7 +82,8 @@ module.exports.run = async (interaction, client, db) => {
             value: `**You have currently used:**\n${usedDefenders.length ? capitalizeArray(usedDefenders).join(', ') + ` (${usedDefenders.length}/${defenderList.length})` : 'No used defenders'}\n\n` + `**You have not used:**\n${defenderList.filter(operator => !usedDefenders.includes(operator)).length ? capitalizeArray(defenderList.filter(operator => !usedDefenders.includes(operator))).join(', ') + ` (${defenderList.length - usedDefenders.length}/${defenderList.length})` : 'All defenders used'}`
         })
     interaction.reply({
-        embeds: [embed]
+        embeds: [embed],
+        flags: visibleMessage ? Discord.MessageFlags.Ephemeral : ''
     });
 }
 

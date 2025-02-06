@@ -11,6 +11,9 @@ const QuickDB = require('quick.db').QuickDB;
 module.exports.run = async (interaction, client, db) => {
     const team = interaction.options.getString('team');
 
+    let visibleMessage = await db.get(`${interaction.user.id}.invisibleMessages`);
+    if (!visibleMessage) visibleMessage = false;
+
     const confirm = new Discord.ButtonBuilder()
         .setCustomId("reset_confirm")
         .setLabel('Confirm')
@@ -49,7 +52,8 @@ module.exports.run = async (interaction, client, db) => {
 
     const response = await interaction.reply({
         embeds: [embed],
-        components: [row]
+        components: [row],
+        flags: visibleMessage ? Discord.MessageFlags.Ephemeral : ''
     });
 
     const collectorFilter = i => i.user.id == interaction.user.id;
