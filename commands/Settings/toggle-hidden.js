@@ -9,19 +9,20 @@ const QuickDB = require('quick.db').QuickDB;
  */
 
 module.exports.run = async (interaction, client, db) => {
-    const choice = interaction.options.getString('choice');
+    let choice = interaction.options.getString('choice');
+    choice = choice == 'true' ? true : false;
 
     const embed = new Discord.EmbedBuilder()
         .setColor('Blurple')
         .setAuthor({ name: `Requested by: ${interaction.user.globalName ? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username}`, iconURL: interaction.user.displayAvatarURL()})
-        .setDescription(`Your command replies will now be ${choice == true ? 'Invisible' : 'Visible'} to others`)
+        .setDescription(`Your command replies will now be ${choice == true ? 'invisible' : 'visible'} to others`)
 
     interaction.reply({
         embeds: [embed],
         flags: Discord.MessageFlags.Ephemeral
     });
 
-    db.set(`${interaction.user.id}.invisibleMessages`, choice == 'true' ? true : false);
+    db.set(`${interaction.user.id}.invisibleMessages`, choice);
 }
 
 module.exports.command = new Discord.SlashCommandBuilder()
