@@ -21,13 +21,14 @@ module.exports.run = async (interaction, client, db) => {
             embeds: [embed],
             flags: Discord.MessageFlags.Ephemeral
         });
-        db.set(`${interaction.user.id}.operatorRemember`, "true");
+        db.set(`${interaction.user.id}.operatorRemember`, true);
     } else {
         interaction.reply({
             embeds: [embed],
             flags: Discord.MessageFlags.Ephemeral
         });
-        db.delete(interaction.user.id);
+        db.delete(`${interaction.user.id}.operatorRemember`);
+        db.delete(`${interaction.user.id}.operators`);
     }
 }
 

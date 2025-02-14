@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const QuickDB = require('quick.db').QuickDB;
-
 const fs = require('fs');
 const util = require('util');
 
@@ -8,10 +7,9 @@ const util = require('util');
  * 
  * @param {Discord.CommandInteraction} interaction 
  * @param {Discord.Client} client 
- * @param {QuickDB} db 
  */
 
-module.exports.run = async (interaction, client, db) => {
+module.exports.run = async (interaction, client) => {
     const codeModal = new Discord.ModalBuilder()
         .setCustomId('modal_eval')
         .setTitle('Code')
@@ -33,9 +31,10 @@ module.exports.run = async (interaction, client, db) => {
  * 
  * @param {Discord.Interaction} interaction 
  * @param {Discord.Client} client 
+ * @param {QuickDB} db
  */
 
-module.exports.modal = async (interaction, client) => {
+module.exports.modal = async (interaction, client, db) => {
     const codeInput = interaction.fields.getTextInputValue('code_modal_eval');
     const name = interaction.user.globalName ? interaction.user.globalName + ` (${interaction.user.username})` : interaction.user.username;
 

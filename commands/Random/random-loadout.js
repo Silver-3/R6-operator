@@ -45,7 +45,7 @@ module.exports.autocomplete = async (interaction, client) => {
  * @param {QuickDB} db
  */
 
-module.exports.run = async (interaction, client) => {
+module.exports.run = async (interaction, client, db) => {
     const name = interaction.options.getString("name");
 
     let visibleMessage = await db.get(`${interaction.user.id}.invisibleMessages`);

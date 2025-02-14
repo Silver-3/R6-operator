@@ -31,7 +31,7 @@ module.exports.run = async (interaction, client, db) => {
     async function randomOperator() {
         const checkedOperators = new Set();
 
-        if (await db.has(interaction.user.id) && await db.get(`${interaction.user.id}.operators`)) {
+        if (await db.get(`${interaction.user.id}.operatorRemember`) == true) {
             while (checkedOperators.size < operatorList.length) {
                 const operator = operatorList[Math.floor(Math.random() * operatorList.length)];
                 
@@ -119,7 +119,7 @@ module.exports.run = async (interaction, client, db) => {
 
         let embeds = [embed];
 
-        if (await db.has(interaction.user.id)) {
+        if (await db.get(`${interaction.user.id}.operatorRemember`) == "true") {
             embeds.push(embed2);
 
             db.push(`${interaction.user.id}.operators.${team}`, operator.name.toLowerCase());
