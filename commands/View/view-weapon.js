@@ -76,7 +76,7 @@ module.exports.run = async (interaction, client, db) => {
                 inline: true
             }, {
                 name: 'Control Difficulty',
-                value: `${weapon.stats.difficulty}`,
+                value: `${weapon.stats.difficulty}/5`,
                 inline: true
             }, {
                 name: ' ',
