@@ -23,7 +23,7 @@ module.exports = {
 
         if (interaction.isButton() && interaction.customId.startsWith('random_')) await client.commands.get('dev-random').button(interaction, client);
         if (interaction.isButton() && interaction.customId == 'challenge') await client.commands.get('random-challenge').button(interaction, client);
-        if (interaction.isModalSubmit() && interaction.customId == 'modal_eval') await client.commands.get('eval').modal(interaction, client);
+        if (interaction.isModalSubmit() && interaction.customId == 'modal_eval') await client.commands.get('eval').modal(interaction, client, db);
         
         if (!interaction.isCommand()) return;
 
