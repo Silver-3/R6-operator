@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@silver-3/r6-info": "^2.2.3",
+    "@silver-3/r6-info": "^2.2.5",
     "axios": "^1.9.0",
     "better-sqlite3": "^11.10.0",
     "canvas": "^3.1.0",

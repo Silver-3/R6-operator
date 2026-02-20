@@ -21,9 +21,25 @@ module.exports = {
             }
         }
 
-        if (interaction.isButton() && interaction.customId.startsWith('random_')) await client.commands.get('dev-random').button(interaction, client);
-        if (interaction.isButton() && interaction.customId == 'challenge') await client.commands.get('random-challenge').button(interaction, client);
-        if (interaction.isModalSubmit() && interaction.customId == 'modal_eval') await client.commands.get('eval').modal(interaction, client, db);
+        if (!interaction.isCommand() && interaction?.customId && interaction?.message.interaction.commandName) {
+            const conversion = {
+                2: 'button',
+                3: 'stringSelectMenu',
+                5: 'modal' 
+            };
+
+            const commandName = interaction.message.interaction.commandName;
+            const command = client.commands.get(commandName);
+            const component = conversion[interaction.componentType || interaction.type];
+
+            if (command && component) {
+                try {
+                    require(`../commands/${command.data.category}/${commandName}.js`)[component](interaction, client, db);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        }
         
         if (!interaction.isCommand()) return;
 
